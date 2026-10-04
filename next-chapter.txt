@@ -225,4 +225,3 @@ Basic pointers (you've already touched the concept implicitly through array deca
 Structures, then a light intro to classes/OOP.
 Recursion — conceptually the biggest jump in this whole track, and worth its own dedicated stretch of dry-runs the way you did for loops/arrays.
 
-h

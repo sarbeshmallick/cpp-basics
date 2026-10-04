@@ -46,3 +46,13 @@ Print their sum.
 
 
 
+--------------------
+
+
+
+ cout << sizeof(variable_name);
+
+ const float Pi= 3.14;                          // now the value 3.14 cannot be changed later in the flow of the program as I have adde const before float 
+
+
+ 

@@ -1,0 +1,379 @@
+
+Q-> in void and returning functions can we cout the function name or we have to cout the variable name?
+A->
+
+Excellent question. This is where the difference between void functions and returning functions becomes very clear.
+
+Case 1: Returning Function
+
+Suppose:
+
+int add(int a, int b) {
+    return a + b;
+}
+
+You can do:
+
+cout << add(4, 5);
+
+Output:
+
+9
+
+Why?
+
+Because:
+
+add(4, 5)
+
+returns:
+
+9
+
+So the compiler effectively sees:
+
+cout << 9;
+
+You can also do:
+
+int result = add(4, 5);
+cout << result;
+
+Output:
+
+9
+
+Both are correct.
+
+Case 2: Void Function
+
+Suppose:
+
+void greet(string name) {
+    cout << "Hello " << name;
+}
+
+If you write:
+
+cout << greet("Sarbesh");
+
+❌ Error
+
+Why?
+
+Because:
+
+greet("Sarbesh")
+
+returns nothing.
+
+The compiler is essentially seeing:
+
+cout << nothing;
+
+which makes no sense.
+
+Instead:
+
+greet("Sarbesh");
+
+Output:
+
+Hello Sarbesh
+
+because the function itself is doing the printing.
+
+Quick Rule
+Returning Function
+int add(int a, int b)
+
+Can do:
+
+cout << add(4, 5);
+
+✅
+
+because it returns a value.
+
+Void Function
+void greet(string name)
+
+Cannot do:
+
+cout << greet("Sarbesh");
+
+❌
+
+because it returns nothing.
+
+Can we cout the function name?
+
+Yes, if the function returns something.
+
+Example:
+
+int square(int x) {
+    return x * x;
+}
+
+cout << square(5);
+
+Output:
+
+25
+
+Here you're cout-ing the function call.
+
+Function Name vs Variable Name
+
+Suppose:
+
+int add(int a, int b) {
+    return a + b;
+}
+
+These are all valid:
+
+cout << add(4, 5);
+int result = add(4, 5);
+cout << result;
+cout << add(4, 5) + 10;
+
+Output:
+
+19
+
+because:
+
+add(4,5)
+↓
+9
+↓
+9 + 10
+↓
+19
+Important Detail
+
+Notice:
+
+cout << add;
+
+❌ Wrong
+
+because add is just the function's name.
+
+You must call it:
+
+cout << add(4, 5);
+
+✅
+
+The parentheses () execute the function.
+
+Revision Shortcut
+Returning Function
+------------------
+Can be used inside cout because it returns a value.
+
+Example:
+cout << add(4,5);
+
+Void Function
+-------------
+Cannot be used inside cout because it returns nothing.
+
+Example:
+greet("Sarbesh");
+
+A good test is:
+
+"Does this function return a value?"
+
+If yes → you can usually use it inside cout, store it in a variable, compare it in an if, etc.
+
+If no (void) → you can only call it as a statement:
+
+greet("Sarbesh");
+
+
+
+
+Q-> thanks for clarification but my question was different 
+
+in code-
+int square(int x) {
+    return x * x;
+}
+
+cout << square(5);
+
+can i just cout the varibale instead of function 
+like cout << x  as x is a varibale here or if there is int a and int b then cout << a 
+
+
+A->
+
+Ah, now I understand your question. You're asking about scope of variables.
+
+Consider:
+
+int square(int x) {
+    return x * x;
+}
+
+and
+
+cout << square(5);
+
+You are asking:
+
+Can I write cout << x; instead?
+
+The answer is:
+
+No.
+
+Because x only exists inside the function.
+
+Think of the function as its own room:
+
+int square(int x) {
+    return x * x;
+}
+
+Inside that room:
+
+x exists
+
+Outside that room (main()):
+
+x does not exist
+
+So:
+
+int square(int x) {
+    return x * x;
+}
+
+int main() {
+    cout << x;
+}
+
+❌ Compilation Error
+
+Something like:
+
+'x' was not declared in this scope
+
+Let's trace:
+
+int square(int x) {
+    return x * x;
+}
+
+int main() {
+    cout << square(5);
+}
+
+When:
+
+square(5)
+
+is called,
+
+temporarily:
+
+x = 5
+
+inside the function.
+
+Then:
+
+return x * x;
+
+returns:
+
+25
+
+After the function finishes:
+
+x is destroyed
+
+It no longer exists.
+
+Same with:
+
+int add(int a, int b) {
+    return a + b;
+}
+
+Can you do:
+
+cout << a;
+
+inside main()?
+
+❌ No.
+
+Because:
+
+a and b only exist inside add()
+
+If you want to print them in main(), you must have variables in main():
+
+int main() {
+    int a = 4;
+    int b = 5;
+
+    cout << a;
+}
+
+✅ Works
+
+because a belongs to main().
+
+Easy Rule
+
+Variables declared:
+
+int square(int x)
+
+or
+
+int add(int a, int b)
+
+are called local variables/parameters.
+
+They can only be used inside that function.
+
+Think:
+
+main() has its own variables
+
+add() has its own variables
+
+square() has its own variables
+
+They cannot directly see each other's local variables.
+
+That's actually one of the reasons we use:
+
+return
+
+The function cannot give you access to x, a, or b directly, so it returns a value instead.
+
+int square(int x) {
+    return x * x;
+}
+
+int result = square(5);
+
+cout << result;
+
+Now:
+
+x exists only inside square()
+
+result exists inside main()
+
+and the returned value acts as the bridge between them.

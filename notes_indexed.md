@@ -9,9 +9,21 @@
 - [6. Strings](#6-strings-)
 - [7. Functions](#7-functions-)
 
----
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 ## 1. Basics
+
+#include<iostream>
+
+#include -> preprocessor directives
+<iostream> -> Header file 
+
+- Header file contains lot of code that gets inserted in preprocessing stage just before compilation.
+- <iostream> helps to define cout object and cin object.  
+
+
 
 <iostream> - Rules. It defines input and output
 
@@ -28,7 +40,8 @@ bool main() { } ❌
 
 void main() - a function which can do something but not need to return
 
-using namesapce std; - it is a shortcut as we don't want to write std:: always
+using namesapce std; - it is a shortcut as we don't want to write std:: always. 
+:: is callled scope resolution operate 
 
 {} - beginning and end of main fuction or the main code which will get compiled
 
@@ -38,6 +51,14 @@ endl; - executes the 1st code and takes 2nd code in new line. **NEW LINE**
 
 
 
+int a = 20;       // the whole thing is called Token in cpp 
+
+int -> keyword (reserved meaning) (eg- return, if, else, for)
+a -> identifier (variables)
+= -> operator 
+20 -> literals 
+; -> punctuator
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -46,12 +67,12 @@ endl; - executes the 1st code and takes 2nd code in new line. **NEW LINE**
 strings are written in double quotes " "
 
 int main() {  
- int num = 10; num is a **variable** and we can write anything like int BC = 10; and it will retuen 10 as integer
+ int num = 10;                                                // num is a **variable** and we can write anything like int BC = 10; and it will retuen 10 as integer
 }
 
 int main() {
 int anyvariablename = 10;
-cout << anyvariablename; // output will be 10
+cout << anyvariablename;                                     // output will be 10
 return 0;
 }
 
@@ -60,7 +81,7 @@ return 0;
 
 **Integer-**
 
-Integer range-> 10^-9 to 10^9
+Integer range->  -10^9 to 10^9
 
 int main() {   
  int numInt = 10;                                                         // no double quotes in variable name
@@ -72,9 +93,10 @@ Output- Integer is: 10
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 **Long-**
 
-Long range-> 10^-12 to 10^12
+Long range->  -10^12 to 10^12
 
 #include <iostream>
 using namespace std;
@@ -93,13 +115,18 @@ Output-
 10
 1000000000
 
+---------------------------------------
+
+
 cout << INT_MAX << endl;
 cout << LONG_MAX << endl;
 cout << LLONG_MAX << endl;
 (after including <climits>)
 
 
+
 ## Code for max- 
+
 ```
 #include <iostream>
 #include <climits> 
@@ -114,11 +141,28 @@ int main() {
 
     return 0;
 }
+
 ```
 Output-> 
 2147483647
 2147483647
 9223372036854775807
+
+--------------------------
+
+
+### Size 
+
+int ->         -2 × 10⁹ to 2 × 10⁹        (4 bytes)
+long long ->   -9 × 10¹⁸ to 9 × 10¹⁸      (8 bytes )
+long ->         Platform dependent, it will be 10¹⁸ if its Linux but 10^9 if Windows so always use long long 
+
+float ->       10⁻³⁸ to 10³⁸       (4 bytes)        (7 Decimal digits)
+double ->      10⁻³⁰⁸ to 10³⁰⁸     (8 bytes)        (15-16 Decimal digits )
+  
+
+------------------------
+
 
 
 ### Fun Fact-
@@ -134,10 +178,13 @@ Output->
 
 
 
+----------------------------
+
+
 
 **LONG LONG-**
 
-range of long long -> 10^-18 to 10^18
+range of long long ->    -10^18 to 10^18
 
 int main() {
 int numInt = 1000000000;
@@ -152,10 +199,12 @@ cout << numInt <<endl;
 1. Number data Types->                    int , long , long long 
 2. Decimal number data types->            float , double 
 3. single alphabet/letter/symbol->        char
-4. multiple letters->                     string                      (string is a class under std & not data tyoe, Eg- "Sarbesh can do it!")
+4. multiple letters->                     string                      (string is a class under std & not data type, Eg- "Sarbesh can do it!")
 5. true/false->                           bool
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 **float & double-**
 
@@ -172,6 +221,8 @@ return 0;
 Output- 8.7
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 **char-**
 
@@ -195,7 +246,10 @@ return 0;
 
 Output- Character : a
 
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 **string-**
 
@@ -216,12 +270,17 @@ Output- Sarbesh can do it!
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
 **bool**
 
 boolean stores only true & false
 bool
 
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 Combining-
 
@@ -253,6 +312,11 @@ output -- ask user to put value int main()
 input -- store it int num1, num2; // one data type then multiple variables
 output operations -- show it as result
 
+cout << "your prompt";
+cin >> variable;
+cout asks/displays → cin receives input.
+
+
 
 **tuf eg code-**
 ```
@@ -260,14 +324,11 @@ int main() {
 
     int age;
 
-    // Output: Ask user a question
-    cout << "Enter your age: ";
+    cout << "Enter your age: ";                                                  // Output: Ask user a question
 
-    // Input: Read what user types and store in 'age'
-    cin >> age;
+    cin >> age;                                                                  // Input: Read what user types and store in 'age'
 
-    // Output: Show the result
-    cout << "Your age is: " << age;
+    cout << "Your age is: " << age;                                              // Output: Show the result
 
     return 0;
 
@@ -282,7 +343,7 @@ int main() {
 
     int num1, num2, num3, num4;                     // we are taking 4 variables here
 
-                                                    // cout << "Enter 4 numbers: " << "\n";
+    cout << "Enter 4 numbers: " << "\n";
 
     cin >> num1 >> num2 >> num3 >> num4;
 
@@ -297,6 +358,7 @@ int main() {
 
 
 **input-output4-** (taking 2 variables i.e bdate & num)
+
 ```
 int main() {
 
@@ -311,11 +373,13 @@ cout << "The number is :" << num;
     return 0;
 
 }
+
 ```
 
 
 
 **input-output5-** (again taking 2 variables but asking user output first)
+
 ```
 int main() {
 
@@ -334,6 +398,7 @@ cout << "The number is : " << num;
     return 0;
 
 }
+
 ```
 
 
@@ -352,9 +417,10 @@ cout << "The DoB is : " << bdate << endl << "The number is : " << num;
 
     return 0;
 }
+
 ```
 
-/\* Input-
+Input-
 Enter your DoB : 22
 Enter a number : 7.85
 
@@ -363,8 +429,34 @@ The DoB is : 22
 The number is : 7.85
 
 // to show we dont hv to write so many lines
-\*/
 
+
+
+
+
+>>> My new way of writing 
+
+Problem Statement- write a program that accepts 4 numbers and print summation of 2 numbers individually and then print the other 2 nos individually 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int num1, num2, num3, num4;
+
+  cout << "Enter 4 numbers: "; cin >> num1 >> num2 >> num3 >> num4;
+
+  // cin >> num1 >> num2 >> num3 >> num4;
+
+  cout << "Sum of 1st & 2nd sum: " << num1 + num2 << '\n';
+  cout << "Sum of 3rd & 4th sum: " << num3 + num4 << '\n';
+
+  return 0;
+}
+
+```
 
 
 
@@ -473,6 +565,31 @@ else {
 ```
 
 
+>>> My way 
+
+```
+int main() {
+
+  int balance;
+
+  cout << "How much balance you have: "; cin >> balance;
+
+  if (balance >= 1000) {
+    cout << "Buy a pizza";
+  }
+
+  else {
+    cout << "I will buy a burger";
+  }
+
+  return 0;
+}
+
+```
+
+
+
+
 **if & else code-**
 
 Problem Statement- Given an age, print adult >= 18, or print "Teen"
@@ -526,7 +643,33 @@ cout << "Child";
     return 0;
 
 }
+
 ```
+
+------------------------------------
+
+
+
+#### Remember
+
+LOGICAL
+Python:  and   or   not
+C++:     &&    ||   !
+
+
+BITWISE
+Python:  &     |    ~
+C++:     &     |    ~
+
+
+And C++ additionally gives you the alternative keyword spellings:
+and  == &&
+or   == ||
+not  == !
+
+
+----------------------------------
+
 
 
 
@@ -566,6 +709,7 @@ cout << "Fail";
 }
 
 return 0;
+
 ```
 
 ----------------------------------------------------------------------------------------------------------
@@ -574,6 +718,8 @@ return 0;
 
 **switch case-**
 
+- when you have one value and several fixed possibilities.
+  
 it is another way of writing if statement but what can be possible if-else conditions
 
 imagine we have exact values like ( 1 = Monday or 90 = Grade A )
@@ -599,8 +745,48 @@ break;
 }
 
 
+#### WITHOUT switch case 
+
+if (day == 1)
+    cout << "Monday";
+else if (day == 2)
+    cout << "Tuesday";
+else if (day == 3)
+    cout << "Wednesday";
+
+
+if (day == 1) 
+**is same as**
+switch (day) {
+case 1:
+  cout << "Monday";
+  break;
+}
+
+
+
+#### Structure 
+
+switch (value) {
+    case value1:
+        // code
+        break;
+
+    case value2:
+        // code
+        break;
+
+    default:
+        // if no case matches
+}
+
+- Default is the else for switch 
+
+
+
 
 **switch-case code-**
+
 ```
 int main() {
 
@@ -647,6 +833,53 @@ switch(day) {
 
 }
 ```
+
+
+>>> Switch case: Calculator 
+
+```
+int main() {
+
+  int a,b; 
+  char op;
+
+  cout << "Enter 2 numbers: "; 
+  cin >> a >> b;
+
+  cout << "Enter operation(+,-,*,/): "; 
+  cin >> op;
+
+  switch (op) {
+
+    case '+':
+    cout << a + b;
+    break;
+
+    case '-':
+    cout << a - b;
+    break;
+
+    case '*':
+    cout << a * b;
+    break;
+
+    case '/':
+    cout << a / b;
+    break;
+
+    default:
+    cout << "Invalid Operator";
+  }
+
+    return 0;
+}
+
+```
+
+
+
+----------------------------------------------
+
 
 
 
@@ -822,7 +1055,356 @@ else {
 
 
 
+>>> Again I am revisiting so my own style now
+
+You are given three integers a, b and c
+print which of these integers are largest 
+if two or more integers are equal and are the largest, print any of them
+the program should indicate that as well
+the 3 integers are 36 56 78 
+
+>>> 1
+
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int a, b, c;
+
+  cout << "Enter 3 integers: "; cin >> a >> b >> c;
+
+
+  if (a >= b) {
+
+    if (a >= c) {
+        cout << "a is largest";
+
+        if (a == b || a == c) {
+            cout << "\nTie exists";
+        }
+    }
+    else {
+        cout << "c is largest";
+
+        if (c == b) {
+            cout << "\nTie exists";
+        }
+    }
+
+}
+
+else {
+
+    if (b >= c) {
+        cout << "b is largest";
+
+        if (b == c) {
+            cout << "\nTie exists";
+        }
+    }
+    else {
+        cout << "c is largest";
+    }
+}
+
+return 0;
+}
+
+```
+
+
+
+>>> 2
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int a, b, c;
+
+  cout << "Enter 3 integers: "; cin >> a >> b >> c;
+
+int largest;
+
+if (a >= b && a >= c)
+    largest = a;
+else if (b >= a && b >= c)
+    largest = b;
+else
+    largest = c;
+
+
+cout << "Largest number: " << largest << '\n';
+    
+
+if ((a == largest && b == largest) ||
+    (a == largest && c == largest) ||
+    (b == largest && c == largest)) {
+    cout << "Tie exists";
+}
+else {
+    cout << "No tie";
+} 
+    return 0;
+}
+
+```
+
+
+>>> 3: Nested if-else
+
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int a, b, c;
+
+  cout << "Enter 3 integers: "; cin >> a >> b >> c;
+
+int largest;
+bool tie = false;
+
+
+if (a >= b) {
+
+  if (a >= c) {
+    largest = a;
+
+    if (a == b || a == c) {
+      tie = true;
+    }
+  }
+
+  else {
+    largest = c;
+
+    if (c == b) {
+      tie = true;
+    }
+  }
+}
+
+else {
+
+  if (b >= c) {
+    largest = b;
+
+    if (b == c) {
+      tie == true;
+    }
+  }
+
+  else {
+    largest = c;
+  }
+}
+
+
+cout << "Largest number: " << largest << '\n';
+
+if (tie) {
+  cout << "There is a tie";
+}
+
+else {
+  cout << "No tie";
+}
+
+return 0;
+}
+
+```
+
+
+> logic-
+if (a >= b) {
+
+    if (a >= c) {
+        ...
+    }
+    else {
+        ...
+    }
+
+}
+else {
+
+    if (b >= c) {
+        ...
+    }
+    else {
+        ...
+    }
+}
+
+
+
+
+>>> 4: Largest + Count check 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int a, b, c;
+
+  cout << "Enter 3 numbers: ";
+  cin >> a >> b >> c;
+
+  int largest = a;
+
+
+  if (b > largest) {
+    largest = b;
+  }
+
+  if (c > largest) {
+    largest = c;
+  }
+
+  int count = 0;
+
+  if (a == largest) {
+    count++;
+  }
+  if (b == largest) {
+    count++;
+  }
+  if (c == largest) {
+    count++;
+  }
+
+  cout << "Largest number: " << largest << '\n';
+
+
+  if (count > 1){
+    cout << "Tie exists";
+  }
+
+  else {
+    cout << "No tie";
+  }
+
+    return 0;
+}
+
+```
+
+> T/S complexity
+
+For 3 numbers it's effectively constant:
+Time: O(1)
+Space: O(1)
+
+For an array of n numbers:
+Time: O(n)
+Space: O(1)
+
+
+
+#### alt
+
+also instead of 
+ if (a == largest) {
+    count++;
+  }
+
+we can do 
+  if (a == largest) count++;
+  if (b == largest) count++;
+  if (c == largest) count++;
+
+
+
+#### same logic used in arrays 
+int largest = arr[0];
+
+for (int i = 1; i < n; i++) {
+    if (arr[i] > largest)
+        largest = arr[i];
+}
+
+int count = 0;
+
+for (int i = 0; i < n; i++) {
+    if (arr[i] == largest)
+        count++;
+}
+
+
+
+>>> 5: Using max function 
+
+```
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int a, b, c;
+    
+    cout << "Enter 3 numbers: ";
+    cin >> a >> b >> c;
+
+    int largest = max({a, b, c});
+
+
+    int count = 0;
+
+    if (a == largest) {
+        count++;
+    }
+
+    if (b == largest) {
+        count++;
+    }
+
+    if (c == largest) {
+        count++;
+    }
+
+
+    cout << "Largest number: " << largest << '\n';
+
+    
+    if (count > 1) {
+        cout << "Tie exists";
+    }
+    else {
+        cout << "No tie";
+    }
+
+    return 0;
+}
+
+```
+
+
+------------------------------------------------
+
+
+
+#### Rule to Remember: For loops 
+
+One statement → {} optional
+Multiple statements → {} required
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -865,6 +1447,8 @@ Output- 1
         4
         ..
         10 
+
+
 
 
 ### Things to remember- 
