@@ -1,6 +1,6 @@
 
 
-// Take 5 inputs and print their sum
+
 
 // Print even numbers from 1 to 20
 

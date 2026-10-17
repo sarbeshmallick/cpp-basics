@@ -1,13 +1,15 @@
 
 
-## Table of Contents
+# Table of Contents
 - [1. Basics](#1-basics)
 - [2. Input/Output](#2-inputoutput-)
-- [3. if/else](#3-ifelse-)
-- [4. Loops](#4-loops-)
-- [5. Arrays](#5-arrays-)
-- [6. Strings](#6-strings-)
-- [7. Functions](#7-functions-)
+- [3. Operator & Maths](#3-OperatorANDmaths)
+- [4. if/else](#4-ifelse-)
+- [5. Loops](#4-loops-)
+- [6. Arrays](#5-arrays-)
+- [7. Strings](#6-strings-)
+- [8. Functions](#8-functions-)
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +168,7 @@ double ->      10⁻³⁰⁸ to 10³⁰⁸     (8 bytes)        (15-16 Decimal d
 
 
 ### Fun Fact-
+
 1. its better to use '\n' compared to "\n" although the difference is tiny 
 2. when we cout << "Hello";  the text is not printed immediately on terminal, instead it goes on temporary memory area called **Buffer**
 3. Flushing means take everything currently sitting in the buffer and send it to the output device right now.
@@ -306,7 +309,7 @@ char reads only first letter
 
 
 
-## 2. Input/Output-
+# 2. Input/Output-
 
 output -- ask user to put value int main()
 input -- store it int num1, num2; // one data type then multiple variables
@@ -465,9 +468,210 @@ int main() {
 
 
 
+# 3. OperatorANDmaths
 
 
-## 3. if/else-
+1. Arithmetic operators
+    eg->    + , - , * , / , %
+
+>>> eg
+
+```
+int main() {
+
+  int a = 20, b = 10;
+
+  cout << a + b << endl;
+  cout << a - b << endl;
+  cout << a * b << endl;
+  cout << a / b << endl;
+  cout << a % b << endl;
+
+    return 0;
+}
+
+```
+
+
+2. Assignment operator / Comparison Operator 
+      eg->   = , == , < , > , <=, >= , != 
+
+
+>>> eg
+
+```
+int main() {
+
+  int a = 5, b = 6, c = 10, d = 10;
+
+  int res = a == b;                           // False 
+
+  int res2 = a != b;                          // True 
+
+  int res3 = c != d;                          // False
+
+  int res4 = a > b;                           // False
+
+  int res5 = !(a > b);                        // NOT operator so False becomes True 
+
+  cout << res << " " << res2 << " " << res3 << " " << res4 <<  " " << res5;
+
+    return 0;
+}
+
+```
+
+> output
+0 1 0 0 1
+
+
+
+
+>>> boolalpha will not work as res value is storing into int so use bool 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 5, b = 6, c = 10, d = 10;
+
+    bool res = a == b;
+    bool res2 = a != b;
+    bool res3 = c != d;
+    bool res4 = a > b;
+    bool res5 = !(a > b);
+
+    cout << boolalpha;
+    cout << res << endl;
+    cout << res2 << endl;
+    cout << res3 << endl;
+    cout << res4 << endl;
+    cout << res5 << endl;
+
+    return 0;
+}
+
+```
+
+> output
+false
+true
+false
+false
+true
+
+
+
+>>> without storing into an integer and directly printing 
+
+
+```
+int main() {
+
+  int a = 5, b = 6, c= 2;
+
+  cout << (a==b);                              // False 
+
+  cout << (b != c) << endl;                   // True 
+
+    return 0;
+}
+
+```
+
+> output
+0
+1
+
+
+> If you want it to print true or false instead of 1 or 0, you can use:
+
+cout << boolalpha << (a == b);
+
+
+
+
+
+3. Gates
+     eg->  or    || 
+           and   &&
+           not   !=
+
+
+
+
+### Trivia
+
+```
+#include <iostream>
+#include<math.h>
+using namespace std;
+
+int main() {
+
+  int num1 = 16;
+
+  cout << sqrt(num1) << endl;                                // sqrt is square root 
+
+  int num2 = 2;
+  int num3 = 4;
+
+  cout << pow(num2, num3) << endl;                          // pow is exponent, in python we can do this with (num1 ** num2)
+
+  cout << pow(10,10) << endl;
+
+  cout << abs(-10) << endl;
+
+    return 0;
+}
+
+```
+
+
+
+
+### Operator Presedence
+
+Rank from Greater to lower 
+
+1. Parantheses 
+symbol- ()
+
+2. Multiplication, Division, modulo 
+symbol-  * , / , %
+
+3. Addition, Sub
+Symbol-  + , -
+
+4. left to right   (equal presedence then left to right)
+
+
+![alt text](images/image-25.png)
+
+
+
+
+
+
+
+### Trivia-
+
+x % n  ->  [0, n-1]
+
+if n is 7 then it will be [0 , 6]
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+# 4. if/else-
 
 if is a conditional statement
 if()
@@ -647,7 +851,6 @@ cout << "Child";
 ```
 
 ------------------------------------
-
 
 
 #### Remember
@@ -1410,7 +1613,7 @@ Multiple statements → {} required
 
 
 
-## 4. Loops-
+# 5. Loops-
 
 - when certain no. of things are repeated use LOOPS 
 - first one is initializer, 2nd one is condition or break statement, third one is increment/decrement
@@ -1512,11 +1715,49 @@ int main() {
     cout << i << endl;
   }
 
+}
 return 0;
 ```
 
 
+> Alt
+
+```
+int main() {
+
+  for (int i = 2; i <= 20; i++) {
+    if (i % 2 == 0) {
+    cout << i << endl;
+  }
+ }
+    return 0;
+}
+
+```
+
+
+> Python
+
+```
+for i in range(1,21):
+    if i % 2 == 0:
+     print(i)
+
+```
+
+**OR**
+
+```
+for i in range(2,21,2):
+    print(i)
+
+```
+
+
+
+
 ### for-loop 10 to 1 in reverse order code-
+
 Problem stat-  print 1 to 10 numbers but in reverse order 
 
 ```
@@ -1531,23 +1772,118 @@ int main() {
 ```
 
 
+
+> while loop
+
+```
+int main() {
+
+  int i = 10;
+
+  while (i >= 1) {
+    cout << i << endl;
+    i--;
+  }
+
+    return 0;
+}
+
+```
+
+
+
+> if, Take n from the user and print numbers from n to 1
+
+```
+int n;
+
+cin >> n;
+
+for (int i = n; i >= 1; i--) {
+    cout << i << endl;
+}
+
+```
+
+
+
+> Python
+
+```
+for i in range(10,0,-1):
+  print(i)
+
+```
+
+**OR**
+
+```
+for i in reversed(range(1,11)):
+  print(i)
+
+```
+
+
+
+
 ### for loop 10 to 1 reverse even code- 
+
 problem stat- print all numbers from 10 to 1 in reverse order but print just even numbers
 
 ```
 int main() {
 
-  for (int i = 10; i >= 1; i = i - 2) {
+  for (int i = 10; i >= 2; i = i - 2) {
     cout << i << endl;
 
   }
     
     return 0;
 }
+
+```
+
+**OR**
+
+```
+int main() {
+
+  for (int i = 10; i>= 1; i--) {
+    if (i % 2 == 0) {
+      cout << i << endl;
+    }
+  }
+    return 0;
+}
+
 ```
 
 
+
+> Python
+
+```
+for i in reversed(range(1,11)):
+  if i % 2 == 0:
+    print(i)
+
+```
+
+**OR**
+
+```
+for i in range(10, 1, -2):
+    print(i)
+
+```
+
+
+
+
+
+
 ### for-loop-5multiples upto 100 code- 
+
 Problem stat- Print all the multiples of 5 till 100 
 
 ```
@@ -1562,6 +1898,44 @@ int main() {
 }
 
 ```
+
+**OR**
+
+
+```
+int main() {
+
+  for (int i = 5; i <= 100; i++) {
+    if (i % 5 == 0) {
+      cout << i << endl;
+    }
+  }
+
+    return 0;
+}
+
+```
+
+
+
+> python 
+
+```
+for i in range(5,101):
+  if i % 5 == 0:
+    print(i)
+
+```
+
+**OR**
+
+```
+for i in range(5, 101, 5):
+    print(i)
+
+```
+
+
 
 
 
@@ -1809,9 +2183,12 @@ Sum = 30
 
 
 
+### Important- 
+
 Notice how the meaning changes based on where cout is placed:
 
-// Inside loop
+> Inside loop
+
 for(...)
 {
     ...
@@ -1819,6 +2196,10 @@ for(...)
 }
 
 ➡️ Print after every iteration.
+
+
+
+> Outisde loop
 
 for(...)
 {
@@ -1829,14 +2210,98 @@ cout << sum;
 
 ➡️ Print only the final result after the loop finishes.
 
+
+
+
 This is one of the most important ideas in loops: statements inside the braces {} run every iteration; statements outside run only once.
+
 
 A picture of when i is inside and outside the loop and i is not only used for counting 
 ![alt text](images/image-9.png)
-The first 1 2 3 4 5 come from inside the loop. Final 6 comes from outside the loop
+The first 1 2 3 4 5 6 come from inside the loop. Final no. 6 comes from outside the loop
+
 i is usually used as a loop counter, but it can also be used for other purposes if needed.
 Remember loop does not stop at 5. It stops when the condition becomes false. 
 ![alt text](images/image-10.png)
+
+
+
+
+
+
+>>> Again revisiting
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int num;
+  int sum = 0;
+
+  cout << "Enter 5 numbers: ";
+
+  for (int i = 1; i <=5; i++) {
+
+    cin >> num;
+    sum = sum + num;
+
+  }
+
+  cout << "The final sum is: " << sum << endl;
+    return 0;
+}
+
+```
+
+
+**OR**
+
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int num, sum = 0;
+
+  for (int i = 1; i <=5; i++) {
+
+    cout << "Enter number " << i << ": ";
+    cin >> num;
+    sum = num + sum;
+
+  }
+
+  cout << "The sum is " << sum << endl;
+  
+    return 0;
+}
+
+```
+
+> i/o
+Enter number 1: 10
+Enter number 2: 20
+Enter number 3: 30
+Enter number 4: 40
+Enter number 5: 50
+The sum is 150
+
+
+> s/t
+
+Time:  O(1) because the loop always runs exactly five times.
+Space: O(1) because only two integer variables are used.
+If the number of inputs were variable, say n, the time complexity would be O(n)
+
+
+> notes
+num stores the latest number entered by the user.
+sum stores the running total.
+num gets overwritten each time, but sum keeps the accumulated total.
 
 
 
@@ -1847,10 +2312,12 @@ Remember loop does not stop at 5. It stops when the condition becomes false.
 
 
 
+
 **While Loop-**
 
 - Another syntatcical way of writing for loop 
 - never forget to include update or increment/decrement in while loop (i++) orelse it will be an infinite loop 
+  
   
 ## Basic structure of while loop- 
 int i = 1;
@@ -1859,6 +2326,14 @@ while(i <= 5) {
     cout << i << endl;
     i++;
 }
+
+
+>> python version-
+i = 0
+while i <= 5:
+  print("Sarbesh", i)
+  i = i + 1
+
 
 
 ## comparison for vs while loop- 
@@ -1885,6 +2360,49 @@ Problem stat- Print all the multiples of 5 till 100
 
 }
 ```
+
+**OR**
+
+```
+int main() {
+
+  int i = 5;
+
+  while (i <= 100) {
+    if (i % 5 == 0) {
+      cout << i << endl;
+    }
+    i += 1;
+  }
+
+    return 0;
+}
+
+```
+
+
+>>> python
+
+```
+i = 5
+while i <= 100:
+  if i % 5 == 0:
+    print(i)
+  i += 1
+
+```
+
+**OR**
+
+```
+i = 5
+while i <= 100:
+  print(i)
+  i += 5
+
+```
+
+
 
 ### Comparison of for vs while loop- 
 int main() {
@@ -2229,7 +2747,7 @@ for vertical output we use endl or "\n"
 
 
 
-## 6. Strings-
+# 7. Strings-
 
 we use string instead of char because char allows single letter or single symbols and string allows multiple letters 
 char -> Stores one character
@@ -2254,6 +2772,7 @@ Access by position
 
 
 # cin vs getline()
+
 cin stops reading after space 
 
 Suppose, user enters Sarbesh Mallick as input 
@@ -2690,7 +3209,7 @@ str outside the loop will simply print sarbesh mallick as it is
 
 
 
-## 7. Functions-
+# 8. Functions-
 
 Imagine you hv- 
 - take 2 numbers
