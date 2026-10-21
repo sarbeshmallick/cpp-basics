@@ -5,9 +5,13 @@
 - [2. Input/Output](#2-inputoutput-)
 - [3. Operator & Maths](#3-OperatorANDmaths)
 - [4. if/else](#4-ifelse-)
-- [5. Loops](#4-loops-)
-- [6. Arrays](#5-arrays-)
-- [7. Strings](#6-strings-)
+- [5. Loops](#5-loops-)
+- [6. Arrays](#6-Arrays-)
+- [Arrays & Pointers](#Array_to_Remember)
+- [Pointer lil excercise](#small_array_exercise)
+- [Stack & Heap](#Stack_vs_Heap)
+- [Pointers, Reference, etc](#Pointers_Reference_etc_charca)
+- [7. Strings](#7-strings-)
 - [8. Functions](#8-functions-)
 
 
@@ -2439,7 +2443,7 @@ A image of i inside the loop and outside the loop where 105 is printed after 100
 
 
 
-## 5. Arrays-
+# 6. Arrays-
 
 An Array is an multiple values of the same type stored in contiguous memory locations.
 Arrays are containers where we can keep similar data types.
@@ -2465,7 +2469,7 @@ arr[4]
 
 arr[2] is the index position 
 
-arr[5] = {10, 20, 30, 40, 50};              // example   
+int arr[5] = {10, 20, 30, 40, 50};                // example   
 Think of an array as a row of boxes:
 Index:    0     1     2     3     4
         +----+----+----+----+----+
@@ -2535,6 +2539,8 @@ first index = 0
 last index  = size - 1
 
 
+
+
 ### Declaring an Array:
 
 data_type array_name[size]  =  {};
@@ -2564,7 +2570,8 @@ float temperature[7];
 double salary[20];
 char grade[5];
 bool passed[50];
-string names[10];     // string array 
+string names[10];      // string array 
+
 
 
 data_type   array_name   [size]
@@ -2592,10 +2599,14 @@ return 0;          // Output- 0x61ff0c        - this is memory address where 5 i
 ```
 
 
+
+
 ### How we declare arrays (structure)-
+
 data type  variable [how many elements that array have] - 
 int num[5];        - it figures out 1st,2nd,3rd,4th,5th memory address & binds them & keep it contagious - that's 5 contagious memory location 
 - every memory location can store an integer & we hv 5 memory locations & all of 5 locations can store integer 
+  
 
 **A small terminology tip:**
 People often get confused because of counting:
@@ -2618,9 +2629,12 @@ cout << &num;     -> it shows the memory location of variable num stored as inte
 
 
 
+
+
 ### Difference- 
 
 how int a = 10;  and   int b[] = {10};    are different 
+
 - int a = 10 means create one box & store 10
 - Create an array with one box, and store 10 in the first (and only) element.
 -  Variable -> One Box , no index needed 
@@ -2632,10 +2646,13 @@ cout << b[0];         // 10
 
 
 
+
 int marks[] = {90, 85, 78};    equals to    int marks[3] = {90, 85, 78};
+
 - Remember array size = elements 
 - [] = {}
 - index is -1 always 
+
 ![alt text](images/image-12.png)
 zero filling -> ![alt text](images/image-13.png)
 mistake to avoid -> ![alt text](images/image-14.png)
@@ -2650,6 +2667,13 @@ for (int i = 0; i < n; i++)
 
 
 
+
+
+-----------------------------------------------
+
+
+
+
 ## Arrays-tuf code- 
 
 Problem statement- 
@@ -2657,6 +2681,7 @@ Create an array of 5 integers.
 Ask the user to enter numbers.
 Store each number in the correct index.
 Immediately print the number that was entered
+
 
 ```
 int main() {
@@ -2676,7 +2701,7 @@ int main() {
 ```
 Input-> 10 20 30 40 50 
 
-Output-
+> Output
 10
 20
 30 
@@ -2684,6 +2709,385 @@ Output-
 50 
 
 
+
+
+
+>>> Again revisiting
+
+>>> cout prompt outside the loop so only ask one time for input.   If we want to first store all numbers & then print it so make 2 loops one for cin & one for cout print 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5];
+
+  cout << "Enter 5 numbers: ";
+
+  for (int i = 0; i < 5; i++) {
+    cin >>  arr[i];
+  }
+  
+  for (int i = 0; i < 5; i++) {
+    cout << arr[i] << endl;
+  }
+
+  return 0;
+}
+
+```
+
+> I/O (if numbers entered vertically each after new line)    (u can print result horizontally by cout << arr[i] << " "; instead of endl )  
+
+Enter 5 numbers: 10
+20
+30
+40
+50
+10
+20
+30
+40
+50
+
+
+> I/O (if numbers entered on same line one after another)
+
+Enter 5 numbers: 10 20 30 40 50 
+10
+20
+30
+40
+50
+
+
+
+
+>>> Modified than before, cout prompt outside the loop so only ask one time for input. if we want to first store all numbers & then print output then use 2 loops one for cin & one for printing output. Result will work in whatever user enters input
+
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[5];
+
+    cout << "Enter 5 numbers: ";
+
+    for (int i = 0; i < 5; i++) {
+        cin >> arr[i];
+    }
+
+    cout << "Array elements: ";
+
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+    return 0;
+}
+
+```
+
+> I/O (if user enter numbers horizontally on single line)
+
+Enter 5 integers: 10 20 30 40 50
+Array elements: 10 20 30 40 50
+
+
+> I/O (if user enters number after each new line)
+
+Enter 5 numbers: 10
+20
+30
+40
+50
+Array elements: 10 20 30 40 50
+
+
+
+
+#### Remember the difference
+- cout Prompt outside the loop: displayed once.
+- cout Prompt inside the loop: displayed five times.
+
+
+
+>>> cout prompt is inside loop so it will ask nth no. of times for input 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5];
+
+  for (int i = 0; i < 5; i++) {
+    cout << "Enter 5 numbers: ";
+    cin >>  arr[i];
+  }
+  
+  for (int i = 0; i < 5; i++) {
+    cout << arr[i] << endl;
+  }
+
+  return 0;
+}
+
+```
+
+> I/O  (you cannot write numbers one at same time, just press enter and type new number) , u can do cout << arr[i] << " "; to print output on same line horizontally 
+
+Enter 5 numbers: 10
+Enter 5 numbers: 20
+Enter 5 numbers: 30
+Enter 5 numbers: 40
+Enter 5 numbers: 50
+10
+20
+30
+40
+50
+
+
+> if we do cout << arr[i] << " ";
+Enter 5 numbers: 10
+Enter 5 numbers: 20
+Enter 5 numbers: 30
+Enter 5 numbers: 40
+Enter 5 numbers: 50
+10 20 30 40 50
+
+
+my gand masti- ![alt text](images/image-26.png)
+
+
+
+
+
+>>> here cout prompt is inside the loop so it will ask nth no of time for input but output result will print immediately without waiting, no waiting happens as cin and cout output are in same loop 
+
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5];
+
+  for (int i = 0; i < 5; i++) {
+
+    cout << "Enter 5 numbers: ";
+    cin >>  arr[i];
+    cout << arr[i] << endl;
+  }
+  
+  return 0;
+}
+
+```
+
+> I/O  (enter number after each new line)
+Enter 5 numbers: 10
+10
+Enter 5 numbers: 20
+20
+Enter 5 numbers: 30
+30
+Enter 5 numbers: 40
+40
+Enter 5 numbers: 50
+50
+
+
+> if u enter number in a single one line then output will be a little diff    ❌ DON'T DO , as cout user input promt will run 5 times 
+Enter 5 numbers: 10 20 30 40 50 
+10
+Enter 5 numbers: 20
+Enter 5 numbers: 30
+Enter 5 numbers: 40
+Enter 5 numbers: 50
+
+
+
+>>> no difference than the previous one , just a cout promt difference 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5];
+
+  for (int i = 0; i < 5; i++) {
+
+    cout << "Enter 5 numbers: " << i + 1 << ": ";
+    cin >>  arr[i];
+    cout << arr[i] << endl;
+  }
+  
+  return 0;
+}
+
+```
+
+> I/O (enter number after each new line)
+
+Enter 5 numbers: 1: 10
+10
+Enter 5 numbers: 2: 20
+20
+Enter 5 numbers: 3: 30
+30
+Enter 5 numbers: 4: 40
+40
+Enter 5 numbers: 5: 50
+50
+
+
+
+
+#### Remember the difference
+
+- cout user input Prompt outside the loop: displayed once.
+- cout user input Prompt inside the loop: displayed five times.
+
+
+#### Why does the position of cout matter?
+Compare these two approaches:
+- Inside the first loop: Each number is printed immediately after it is entered.
+- In a second loop: All numbers are entered first, and then the program prints them afterward.
+
+Since your problem statement specifically says immediately print the number that was entered, print result in first loop only 
+
+
+
+### using vectors to let user decide upto how many numbers they want to print and then they will give value to each numbers 
+
+>>> for user dynamic input and not limited to 5 we have to use dynamic arrays -> vector for cpp 
+
+
+```cpp
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+    int n;
+
+    cout << "How many numbers? ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Please enter a positive number." << endl;                                  // u can excluse this 
+        return 0;
+    }
+
+    vector<int> arr(n);
+
+    cout << "Enter " << n << " numbers: ";
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    cout << "Array elements: ";
+
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+
+    return 0;
+}
+
+```
+
+> I/O
+How many numbers? 5
+Enter 5 numbers: 10
+20
+30
+40
+50
+Array elements: 10 20 30 40 50 
+
+
+
+#### Note-
+
+Why use vector?
+A normal array such as int arr[5] has a fixed size. A vector<int> lets you choose the size at runtime, based on the user's input.
+
+My recommendation: For your current DSA practice, first learn fixed-size arrays using int arr[5]. Then learn vector<int>, which is widely used in modern C++ and competitive programming.
+
+
+
+### same problem solving in python 
+python list = cpp vector 
+
+
+>>> user dynamic -> in python, we can use lists 
+
+```py
+
+numbers = []
+
+print("Enter 5 numbers:")
+
+for i in range(5):
+    num = int(input())
+    numbers.append(num)
+
+print("Array elements:", numbers)
+
+```
+
+> I/O
+Enter 5 numbers:
+10
+20
+30
+40
+50
+Array elements: [10, 20, 30, 40, 50]
+
+
+
+
+#### difference in cpp vectors & python lists 
+
+- in python list we use variable.appened() , insert(0, 10) , pop()
+
+- in cpp vectors we use variable.push_back() , variable.insert(v.begin(), 10) ,  .pop_back()
+
+![alt text](images/image-27.png)
+
+- in cpp vectors we can only store one datatype unlike lists in python 
+  vector<int>      — integers
+  vector<string>   — strings
+  vector<float>    — floating-point values
+  vector<double>   — more precise floating-point values
+  vector<char>     — individual characters
+
+
+
+-------------------------------------
 
 
 
@@ -2735,6 +3139,1283 @@ if we want our output to come horizontally we have to use   " "
 cout << num << " "; 
 
 for vertical output we use endl or "\n" 
+
+
+
+
+
+------------------------------------------------------------------------
+
+
+### Difference btw .size() and sizeof() 
+
+- The main difference is: .size() tells you how many elements are in a container, whereas sizeof() tells you how much memory an object occupies, in bytes.
+- .size() works with vectors and not ordinary arrays whereas sizeof() works with both 
+
+
+
+```
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> arr = {10, 20, 30};
+
+    cout << arr.size() << endl;
+
+    cout << sizeof(arr);
+
+    return 0;
+}
+
+```
+
+> output
+3
+12
+
+
+
+
+------------------------------------------------------------------------
+
+
+
+### Printing Arrays 
+
+1. **Method 1: Traditional for loop** 
+
+```
+for (int i = 0; i < n; i++) {
+    cout << arr[i] << endl;
+}
+
+```
+- Useful when you need to access arr[i + 1], reverse an array, or work with specific positions.
+- Uses an index i to access each element. Gives you complete control over the index.
+
+
+
+
+2. **Method 2: A range-based for loop**
+
+```
+int arr[] = {2, 3, 4, 5, 6};
+
+for (int value : arr) {
+    cout << value << " ";
+}
+
+```
+
+- Best when you simply want to read or process each element.
+value — a variable that holds the current element. u can choose any variable name instead of value 
+: — means to take each element from the array, one at a time.
+
+
+
+> Range-based loop with const reference — efficient for large objects
+
+```
+for (const int& value : arr) {
+    cout << value << endl;
+}
+```
+- const prevents modification through value
+- & avoids copying each element.
+
+
+
+
+3. **Method 3: Automatically determine the array size by using sizeof**
+
+int arr[] = {2, 3, 4, 5, 6};
+int n = sizeof(arr) / sizeof(arr[0]);
+
+for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+}
+
+
+>>> Using combination of rang based and sizeof when I know the values 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    for (int value : arr) {
+        cout << value << " ";
+    }
+
+    return 0;
+}
+
+```
+
+> output
+10 20 30 40 50
+
+- Here, n gives you the array length if you need it for index-based algorithms. The range-based loop prints the elements without needing n.
+
+
+
+
+
+4. **Method 4: std::vector::size()**
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> arr = {10, 20, 30};
+
+    cout << arr.size();
+
+    return 0;
+}
+
+
+
+>>> Best approach when taking user input. when u don't know the elements until the program runs. Use a vector
+
+```
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+    int n;
+    cout << "How many elements do you want to enter? ";
+    cin >> n;
+
+    vector<int> arr(n);
+
+    cout << "Enter " << n << " elements: ";
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    cout << "Array elements: ";
+    
+    for (int value : arr) {
+        cout << value << " ";
+    }
+
+    return 0;
+}
+
+```
+
+> I/O
+Enter 5 elements: 10
+20
+30
+40
+50
+Array elements: 10 20 30 40 50
+
+
+
+
+#### If you need a collection that can grow or shrink, use a vector:
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> arr = {2, 3};
+
+    arr.push_back(4);
+    arr.push_back(5);
+
+    for (int value : arr) {
+        cout << value << " ";
+    }
+
+    return 0;
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------
+
+
+
+
+## Array_to_Remember
+
+
+#### 1. Understanding Arrays in Memory
+
+An array stores multiple elements of the same data type in **contiguous memory locations** (next to one another).
+
+```cpp
+int arr[] = {10, 20, 30};
+```
+
+Conceptually, memory looks like this:
+
+| Element | Value | Illustrative address |
+|--------|---:|---:|
+| arr[0] | 10 | 1000 |
+| arr[1] | 20 | 1004 |
+| arr[2] | 30 | 1008 |
+
+
+Assume each `int` occupies 4 bytes. Actual addresses vary by program and system.
+
+Important:
+- arr[0] is the first element.
+- arr[1] is the second element.
+- arr[2] is the third element.
+- The array is one object containing all three elements.
+
+
+
+#### 2. What Is a Pointer?
+
+A pointer is a variable that stores the address of another object.
+
+```
+int num = 10;
+int* ptr = &num;
+```
+
+Here:
+- num stores the integer value `10`.
+- &num obtains the address of `num`.
+- ptr stores that address.
+- *ptr accesses the integer object at that address. dereferencing 
+
+
+For example:
+
+```
+cout << *ptr;         // Prints 10
+
+*ptr = 20;            // Changes num to 20
+
+cout << num;          // Prints 20
+
+```
+
+Remember:
+
+- int* ptr — declares a pointer to an integer.
+- &num — obtains the address of `num`.
+- *ptr — accesses the object pointed to by `ptr`.
+
+The `*` symbol has different meanings depending on context: it declares a pointer in `int* ptr`, but dereferences a pointer in `*ptr`.
+
+
+
+
+
+## small_array_exercise
+
+>>> small exercise
+
+```
+  int num = 10;
+  int abc = 200;
+
+  int* ptr = &num;
+
+  cout << &num << endl;
+  cout << &abc << endl;
+  cout << ptr << endl;
+
+  cout << *ptr << endl;
+
+  *ptr = 100;
+
+  cout << ptr << endl;
+  cout << *ptr << endl;
+
+  ptr = &abc;
+
+  cout << ptr << endl;
+  cout << *ptr;
+
+    return 0;
+}
+
+```
+
+> output
+0x61ff08
+0x61ff04
+0x61ff08
+10
+0x61ff08
+100
+0x61ff04
+200
+
+
+
+
+#### 3. Array-to-Pointer Conversion
+
+Consider:
+
+```
+int arr[] = {10, 20, 30};
+
+int* p = arr;
+
+```
+
+Why does this work without writing &arr[0]?
+
+In most expressions, an array name automatically converts to a pointer to its first element. This is called **array-to-pointer conversion**.
+
+Therefore, these initializations are equivalent:
+
+```
+int* p = arr;
+int* p = &arr[0];
+
+```
+
+Both make `p` point to the first element, `arr[0]`.
+
+**Important:** An array is not itself a pointer. It is an array object that converts to a pointer to its 1st element in most expressions.
+
+
+
+
+#### 4. Accessing Array Elements Through a Pointer
+
+Given:
+
+```
+int arr[] = {10, 20, 30};
+int* p = arr;
+
+```
+
+
+Initially, `p` points to `arr[0]`.
+
+| Expression | Meaning | Value |
+|---|---|---:|
+| *p       | Access the element currently pointed to by `p` | 10 |
+| *(p + 1) | Access the next element                        | 20 |
+| *(p + 2) | Access the element two positions ahead         | 30 |
+
+Pointer arithmetic moves in units of the pointed-to type, not individual bytes.
+
+For an int*, p + 1 advances by one int element, typically 4 bytes.
+
+Also:
+
+```cpp
+arr[1] == *(arr + 1)
+arr[2] == *(arr + 2)
+
+```
+
+Array indexing and pointer arithmetic can access the same elements.
+
+
+
+#### 5. Changing a Pointer Does Not Change the Array
+
+Consider:
+
+```
+int arr[] = {10, 20, 30};
+int* p = arr;
+
+p = p + 1;
+
+```
+
+Initially:
+
+p → arr[0] → 10
+
+After p = p + 1:
+
+p → arr[1] → 20
+
+The pointer moves to the next element. The array remains unchanged.
+
+Therefore:
+
+```cpp
+cout << *p;           // Prints 20
+cout << arr[0];       // Prints 10
+
+```
+
+Remember the distinction:
+
+- p = p + 1; changes the pointer's stored address.
+- *p = 99; changes the value of the element currently pointed to.
+
+
+
+
+#### 6. Complete Example: Trace the Pointer
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {10, 20, 30};
+    int* p = arr;
+
+    cout << *p << '\n';
+    cout << *(p + 1) << '\n';
+
+    cout << *p << endl;
+
+    p = p + 1;
+
+    cout << *p << '\n';
+    cout << arr[0] << '\n';
+
+    return 0;
+}
+```
+
+> Output
+10
+20
+10
+20
+10
+
+
+
+
+Execution trace:
+
+1. int* p = arr; — p points to arr[0].
+2. *p — prints 10
+3. *(p + 1) — prints 20 without changing p
+4. p = p + 1; — moves p to arr[1]
+5. *p — now prints 20
+6. arr[0] — still prints 10, because moving p did not modify the array.
+
+
+
+
+#### 7. Why Do `arr`, `&arr[0]`, and `&arr` Print the Same Address?
+
+
+Consider:
+
+```
+int arr[] = {10, 20, 30};
+
+cout << arr << '\n';
+cout << &arr[0] << '\n';
+cout << &arr << '\n';
+
+```
+
+These expressions commonly display the same numerical starting address, but their types differ.
+
+| Expression   | Type | Meaning |
+
+| arr in this expression | Converts to int* | Pointer to the first element |
+| &arr[0] | int* | Address of the first element |
+| &arr | int (*)[3] | Pointer to the entire array of three integers |
+
+
+
+The entire array and its first element start at the same memory location. That is why their addresses have the same numerical representation.
+
+However, their pointer types matter:
+
+```cpp
+arr + 1
+```
+
+Advances by one `int` element.
+
+```cpp
+&arr + 1
+```
+
+Advances by one entire array object — three `int` elements.
+
+Assuming each `int` occupies 4 bytes, the first advances by 4 bytes and the second by 12 bytes.
+
+
+
+#### 8. Important Exceptions to Array-to-Pointer Conversion
+
+Array-to-pointer conversion does not happen in every expression.
+
+For example:
+
+```cpp
+int arr[] = {10, 20, 30};
+
+cout << sizeof(arr);
+```
+
+Assuming sizeof(int) == 4, this prints `12`, the size of the entire array.
+
+But:
+
+```cpp
+int* p = arr;
+cout << sizeof(p);
+```
+
+On a typical 64-bit system, this prints `8`, the size of the pointer.
+
+sizeof(arr) measures the whole array because the conversion does not happen in this context.
+
+
+
+#### 9. Common Mistakes and Rules
+
+1. **An array is not a pointer.** An array stores its elements; a pointer stores an address.
+2. **int* p = arr; is valid.** The array name converts to a pointer to the first element.
+3. **p = p + 1; does not modify the array.** It changes which element the pointer points to.
+4. ***p = 50; modifies an element.** It changes the value at the pointer's current destination.
+5. **Do not dereference an out-of-bounds pointer.** A pointer one past the final element may be formed, but it must not be used to access an element.
+6. **Pointer arithmetic depends on the pointed-to type.** Adding one to an int* advances by one integer element, not one byte.
+
+
+
+
+#### 10. Quick Revision
+
+- arr[i] — accesses element at index i
+- arr — usually converts to a pointer to arr[0]
+- &arr[0] — address of the first element.
+- &arr — address of the entire array.
+- int* p = arr; — makes p point to the first element of arr
+- *p — accesses the element pointed to by `p`.
+- p + 1 — points to the next element.
+- p = p + 1 — changes the pointer's destination.
+- *p = 50 — changes the pointed-to element's value.
+
+
+**Golden rule:** Moving a pointer changes where it points. Dereferencing a pointer lets you access or modify the object at that location. Neither operation automatically creates or copies the array.
+
+
+
+#### Does an array store values on the stack?
+
+int arr[5] = {10, 20, 30, 40, 50};
+
+- This declares an array named arr containing five integers.
+- Each element is a separate int object within the array. If an int occupies four bytes, the entire array occupies 20 bytes.
+- The elements occupy contiguous memory — there are no gaps between consecutive elements.
+- Each element has its own index and value.
+- The array is one array object containing five elements, not five separately allocated variables.
+
+
+The array will typically be stored in the function's stack frame in a conventional implementation.
+An array allocated dynamically can occupy dynamically allocated storage, commonly called the heap.
+
+
+
+#### Compare the declarations
+
+int arr1[5] = {2, 3};
+int arr2[] = {2, 3};
+int arr3[2] = {2, 3};
+
+- The first array has five elements. The first two contain 2 and 3; the remaining three are initialized to zero.
+- The second array has two elements because the compiler infers the size.
+- The third array has two elements because you explicitly specify the size.
+
+
+cout << sizeof(arr1) << '\n';             // Typically 20
+cout << sizeof(arr2) << '\n';             // Typically 8
+cout << sizeof(arr3) << '\n';             // Typically 8
+
+
+
+
+
+-----------------------------------------------
+
+
+
+
+### Discussion on Retanining old values after getting modified 
+
+ If you want to retain old values, you have to store them somewhere.
+
+int num = 10;
+int previous = num;
+num = 20;
+
+- num contains 20.
+- previous contains 10.
+You explicitly preserved the old value by copying it into another variable before replacing it.
+
+
+
+
+
+### const and sizeof
+
+cout << sizeof(variable_name);
+
+const float Pi= 3.14;                          // now the value 3.14 cannot be changed later in the flow of the program as I have adde const before float 
+
+
+
+
+### Discussion on lifetime of a varibale
+
+Lifetime of a variable-
+
+Consider:
+int main() {
+    int num = 10;
+    num = 20;
+    return 0;
+}
+
+num is a local variable. It exists during the execution of its scope and its lifetime ends when that scope exits. You cannot expect the local variable to remain available after main() has finished. The program is ending, and its local variables' lifetimes have ended.
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+## Stack_vs_Heap
+
+### Stack vs Heap 
+
+
+Stack (common implementation)
+- Function-call information and often local variables such as num and sum.
+
+
+Heap (dynamic storage)
+- Function-call information and often local variables such as num and sum.
+
+
+
+
+1. **Stack-**
+
+Think of the stack as a pile of plates. You put a plate on top, and when you're finished, you remove the top plate first.
+This is called LIFO: Last In, First Out.
+The program's call stack commonly works in a similar way: when a function is called, a new stack frame is used for its execution. When the function returns, that frame is removed.
+
+
+>>> Eg: using Local Variables
+
+```cpp 
+
+void greet() {
+    int age = 25;
+    int score = 100;
+}
+
+int main() {
+    greet();
+    return 0;
+}
+
+```
+
+
+> main()
+The program enters main(). A typical implementation creates a stack frame for main.
+
+> greet(): age = 25, score = 100
+A new frame is used for greet(). Its local variables age and score are associated with this function's execution.
+
+> main()
+greet() finishes. Its frame is no longer active, and its local variables' lifetimes end.
+
+
+ending a variable's lifetime does not necessarily mean that its physical memory is immediately wiped to zero.
+
+
+Why is the stack useful?
+Stack allocation and function-call management are usually very fast because they often involve simple adjustments to a stack pointer.
+Local variables also have a natural lifetime: they're generally needed while their function or scope is active.
+However, the stack has limited capacity. Extremely deep recursion or excessively large local objects can exhaust it, resulting in a stack overflow or other failure.
+
+
+
+
+
+2. **Heap-**
+
+The heap is a region of memory commonly used for dynamic memory allocation.
+Unlike an ordinary local variable whose lifetime is tied to its scope, dynamically allocated objects can remain alive after the function that created them returns—provided their lifetime hasn't otherwise ended.
+
+
+Consider:
+
+```
+int* createNumber() {
+    int* ptr = new int(42);
+    return ptr;
+}
+
+```
+
+ptr is an ordinary local variable.
+new int(42) dynamically creates an integer initialized to 42.
+ptr holds the address of that dynamically allocated integer.
+The function returns the address.
+
+When createNumber() returns, the local variable ptr goes out of scope. But the dynamically allocated integer can remain alive.
+Why? Because its lifetime isn't tied to the local variable ptr.
+
+
+>>> Here how to use it-
+
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int* createNumber() {
+    int* ptr = new int(42);
+    return ptr;
+}
+
+int main() {
+    int* p = createNumber();
+
+    cout << *p << '\n';                // Prints 42
+
+    delete p;
+    p = nullptr;
+
+    return 0;
+}
+
+```
+
+
+---------------------------------------------------------
+
+
+## Pointers_Reference_etc_charca
+
+
+### Pointers, Reference & Multiple Concepts 
+
+
+
+#### Declaration-
+
+int* num;
+
+Here, * means num is a pointer to an int. A pointer is a variable that can store the address of an integer object.
+
+
+Dereferencing- 
+*num = 20;
+
+* means access the integer object that num points to and assign it the value 20.
+
+
+int* num = 10;  // Incorrect 
+This declares num as a pointer, which must hold an address of a suitable integer object, not the integer value 10.
+
+
+The pointer stores an address; the object at that address stores the value (eg: 10, Sarbesh)
+
+
+To make a pointer point to an existing integer, you can write:
+
+int num = 10;
+int* ptr = &num;
+cout << *ptr;            // Prints 10
+
+
+&num means the address of num.
+ptr points to num. You can access its value through the pointer
+Notice that we haven't used new at all!
+
+
+
+
+----------------------------
+
+
+
+### New-
+
+
+new is a built-in C++ operator that dynamically creates an object and gives you a pointer to it.
+
+For eg:
+int* num = new int(10);
+
+- new int(10) creates a dynamically allocated integer initialized to 10.
+- returns the address of that integer, which gets stored in num.
+- So the pointer holds an address, while the dynamically allocated integer holds 10.
+
+
+
+You can access and change that integer:
+
+cout << *num;            // Prints 10    (Access)
+
+*num = 25;
+cout << *num;           // Prints 25     (Modify)
+
+
+When you're finished with a raw dynamically allocated integer, you must release it:
+
+delete num;
+num = nullptr;
+
+delete num ends the dynamically allocated object's lifetime and releases its storage. Setting num = nullptr makes the pointer null; it doesn't perform the deallocation itself.
+
+
+
+> for array of 5 elements 
+
+int* num = new int[5];
+
+num[0] = 10;
+num[1] = 20;
+....................I can do this manually or I can just intialize it to zero ->   int* num = new int[5]();
+
+but if you do it for arrays then use delete[] and not delete 
+
+delete[] num;
+num = nullptr;
+
+
+> new works for double, float, char 
+
+just The pointer's type should match the type of object allocated. For example, int* should point to an integer object.
+
+
+pointer = new DataType(initial_value);         // General Pattern
+
+int* p = new int(25);
+double* q = new double(3.14);
+char* r = new char('Z');
+
+
+
+
+
+--------------------------------------
+
+
+
+1. pass by value 
+
+void change(int x) {
+    x = 50;
+}
+
+int main() {
+    int num = 10;
+    change(num);
+
+    cout << num;  // 10
+}
+
+- The function receives a separate copy of num. Changing x doesn't change the original num.
+
+
+
+2. Pass by reference
+
+void change(int& x) {
+    x = 50;
+}
+
+int main() {
+    int num = 10;
+    change(num);
+
+    cout << num;  // 50
+}
+
+- The int& parameter is a reference to the original variable. Changing x changes num.
+
+- int& is a reference.  
+- int& = num;      & declares a reference. The variable x becomes another name for num.
+- when u call change(num) the num becomes another name for x and when u update x , num also updates 
+
+-  change(&num)   ->  This is different. &num is address of num. The result is a pointer with type int*
+-  int& x  ->  A reference x is created and will recieve an integer object variable and that object will equals to x
+-  int* x  ->  A pointer 
+
+![alt text](images/image-28.png) 
+
+![alt text](images/image-29.png)     ![alt text](images/image-30.png)
+
+![alt text](images/image-31.png)
+
+int& lets you work with the original variable directly 
+int* lets you access the original through an address
+and int gives you a copy.
+
+
+>>> excercise
+```
+#include <iostream>
+using namespace std;
+
+void change(int* x) {
+    int temp = 50;
+    x = &temp;
+    *x = 100;
+}
+
+int main() {
+    int num = 10;
+    int* p = &num;
+
+    change(p);
+
+    cout << num;
+}
+```
+
+Output-
+10
+
+
+
+
+3. Passing a pointer by value 
+
+void change(int* p) {
+    *p = 50;
+}
+
+int main() {
+    int num = 10;
+    change(&num);
+
+    cout << num;  // 50
+}
+
+- the pointer p is passed by value, meaning the function receives a copy of the address. However, that copied address still points to the original num, so *p = 50 changes the original integer.
+If you instead reassign p itself inside the function, that won't change the caller's pointer
+
+
+void changePointer(int* p) {
+    p = nullptr;                    // Changes only the local pointer copy
+}
+
+
+
+
+>>> Given this code, what will it print, and why?
+
+```
+int num = 10;
+int* ptr = &num;
+
+*ptr = 30;
+ptr = nullptr;
+
+cout << num;
+
+```
+
+> output
+30
+
+
+
+#### Working-
+
+1. int* ptr = &num;
+ptr stores the address of num. It points to the same integer object. ptr points to the object num and not reference
+ptr ──→ num → 10
+
+2. *ptr = 30;
+This changes the integer at the address stored in ptr. Since that integer is num, its value becomes 30.
+ptr ──→ num → 30
+
+3. ptr = nullptr;
+This makes ptr point to nothing. It does not undo the earlier change to num.
+ptr → nullptr
+num → 30
+ptr = nullptr does not end the pointer's lifetime. It only changes the pointer's stored value. The pointer variable continues to exist until its scope ends.
+
+4. cout << num;
+The program reads num directly, independently of ptr. 
+30 
+
+
+Remember this distinction:
+- *ptr = 30; → changes the value of the object pointed to.
+- ptr = nullptr; → changes the value of the pointer itself.
+
+
+
+
+>>> Predict the output
+
+```cpp
+int num = 10;
+int* ptr = &num;
+
+int other = 50;
+ptr = &other;
+
+*ptr = 80;
+
+cout << num << " " << other;
+
+```
+
+> output
+10 80 
+
+
+
+---------
+
+
+Comparison- 
+
+int num = 10;
+int* ptr = &num;
+
+Two variables exist here:
+- num is an integer variable whose value is 10.
+- ptr is a pointer variable whose value is the address of num.
+
+
+
+>>> Another eg
+
+```
+int num = 10;
+int* ptr = &num;
+
+num = 20;
+
+cout << num << '\n';                // 20
+cout << *ptr << '\n';              // 20
+
+```
+
+
+This is where pointers become useful.
+
+
+
+>>> suppose u hv 2 integers
+
+```
+int a = 10;
+int b = 50;
+
+int* ptr = &a;
+cout << *ptr << '\n';  // 10
+
+ptr = &b;
+cout << *ptr << '\n';  // 50
+
+```
+
+Here, ptr can be redirected to a different integer without changing either integer's value.
+- a remains 10.
+- b remains 50.
+- ptr changes which object it refers to through its stored address.
+That's a key capability of pointers: they let you indirectly access objects and change which object you access.
+This becomes useful in linked lists, trees, dynamic memory, and other data structures.
+
+
+
+
+---------------------------------
+
+
+
+Pointer vs reference (&)
+
+int num = 10;
+
+int* ptr = &num;                 // Pointer stores an address
+int& ref = num;                 // Reference acts as another name for num
+
+*ptr = 20;
+ref = 30;
+
+cout << num;                   // 30
+
+- *ptr dereferences a pointer to access an object.
+- ref directly refers to the existing object as an alias.
+A pointer can be reassigned to point to another object or set to nullptr. A reference, once initialized, cannot be reseated to refer to a different object.
+
+
+
+
+-----------------------------------------
+
+
+
+
+1. What happens with int* ptr = num;  
+❌ Error
+
+int num = 10;
+int* ptr = num;
+
+Error! Because num contains the integer value 10, but ptr is declared to store the address of an integer. U trying to put an integer value into a pointer variable.
+Even if 10 happens to look like a possible memory address numerically, C++ doesn't implicitly convert an ordinary integer into an int* here.
+
+
+
+2. What happens with int* ptr = &num;
+✔ Valid 
+
+int num = 10;
+int* ptr = &num;
+
+cout << *ptr;                     // Prints 10
+*ptr = 20;
+cout << num;                      // Prints 20
+
+
+This is valid C++.
+- num stores the integer 10.
+- &num obtains the address of num.
+- ptr stores that address.
+
+
+
+-------------------
+
+
+
+1. changing the pointer, chainging where pointer points to 
+ptr = &num;
+
+
+2. Change the pointed-to value
+*ptr = 30;
+You're changing the integer, not the pointer's address.
+
+
+>>> example
+
+```
+int num = 10;
+int other = 50;
+
+int* ptr = &num;
+
+ptr = &other;
+
+cout << num << '\n';
+cout << other << '\n';
+cout << *ptr << '\n';
+
+```
+
+> output
+10
+50
+50
+
+
+#### understanding 
+
+Think of ptr as a variable holding a destination address.
+- ptr = &num; — change the destination to num.
+- ptr = &other; — change the destination to other.
+- *ptr = 100; — change the value at the current destination to 100.
+
+
+
+>>> now see
+
+```cpp
+
+int main() {
+
+int num = 10;
+int other = 50;
+
+int* ptr = &num;
+
+ptr = &other;
+
+*ptr = 100;
+
+cout << num << '\n';
+cout << other << '\n';
+cout << *ptr << '\n';
+cout << other;
+
+    return 0;
+}
+
+```
+
+> output
+10
+100
+100
+100
+
+
+---------------------
+
+
+
+>>> final eg
+
+```cpp
+
+int num = 10;
+int other = 50;
+int* ptr = &num;
+
+*ptr = 20;
+ptr = &other;
+*ptr = 80;
+
+cout << num << endl << other << '\n' << *ptr;
+cout << num << " " << other << " " << *ptr;
+
+```
+
+> output
+20
+80
+80 
+20 80 80 
+
+
+
 
 
 
