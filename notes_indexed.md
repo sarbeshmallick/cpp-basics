@@ -7,6 +7,7 @@
 - [4. if/else](#4-ifelse-)
 - [5. Loops](#5-loops-)
 - [6. Arrays](#6-Arrays-)
+- [Array Operations](#Array_Operations)
 - [Arrays & Pointers](#Array_to_Remember)
 - [Pointer lil excercise](#small_array_exercise)
 - [Stack & Heap](#Stack_vs_Heap)
@@ -16,6 +17,7 @@
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -3265,20 +3267,31 @@ int main() {
 
 
 
+>>> Printing elements using traditional for loop for cin and range based loop for output
 
-4. **Method 4: std::vector::size()**
-
+```
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
-    vector<int> arr = {10, 20, 30};
 
-    cout << arr.size();
+  int arr[5];
+
+  cout << "Enter 5 elements: ";
+
+  for (int i = 0; i < 5; i++) {
+    cin >> arr[i];
+  }
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
 
     return 0;
 }
+
+```
+
 
 
 
@@ -3345,6 +3358,1443 @@ int main() {
 
 
 
+
+
+---------------------------------------------------------------
+
+
+
+
+
+## Array_operations 
+
+### Array Operations 
+
+
+
+
+1. **Array Traversal using vector**
+
+```
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  int n;
+  cout << "Enter number of elements u want to enter: "; cin >> n;
+
+  vector<int> arr(n);
+
+  cout << "now enter value of " << n << " elements: ";
+
+  for (int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  arr.push_back(100);
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> I/O
+now enter value of 5 elements: 10
+20
+30 
+40
+50
+10 20 30 40 50 100 
+
+
+
+
+
+2. **Sorting & Reversing Arrays**
+
+### Sorting 
+
+- Sorting arranges values from smallest to largest
+- C++ provides sort() in the <algorithm> library
+- The end position is excluded from sorting. 
+- for descending order: sort(start, end, greater<int>());
+
+
+>>> using sort() function for fixed style arrays
+
+```
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  int arr[] = {30,10,40,50,20};
+  int n = sizeof(arr) / sizeof(arr[0]);
+
+  sort(arr, arr + n);                               // sort(arr, arr + 5)    Alt-  I can also write this if no of elements are 5
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+
+  sort(arr, arr + n, greater<int>());
+
+  cout << "Reverse sort: " << " ";
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+10 20 30 40 50 Reverse sort:  50 40 30 20 10
+
+> complexity
+Time Complexity of sort(arr, arr + n); -> Ascending sort via IntroSort- O(nlog n)
+Space Complexity of sort(arr, arr + n); -> O(log n) (call stack)
+Time complexity for loop- O(n) & Space complexity- O(1)
+
+Overall Time- O(nlog n)
+Overall Space- O(logn)
+
+
+
+>>> using sort() with vectors
+
+```
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {30,10,40,50,20};
+
+  sort(arr.begin(), arr.end());
+
+  cout << "Ascending: ";
+  for (int value: arr) {
+    cout << value << " ";
+  }
+
+  cout << endl;
+
+  sort(arr.begin(), arr.end(), greater<int>());
+
+  cout << "Descending: ";
+  for (int value : arr) {
+    cout << value << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+Ascending: 10 20 30 40 50 
+Descending: 50 40 30 20 10 
+
+
+
+### Reversing 
+
+- Reversing means changing the order of the elements, not sorting them.
+- 2 methods is there:- 1. STL reverse()  2. Two Pointer 
+
+
+>>> 1. using STL reverse() 
+
+```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {30,10,40,50,20};
+
+  reverse(arr.begin(), arr.end());
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+
+  cout << endl;
+
+  int ar[] = {1,2,5,3,4};
+  int n = sizeof(ar) / sizeof(ar[0]);
+
+  reverse(ar, ar + n);
+
+  for (int i = 0; i < n; i++) {
+    cout << ar[i] << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+20 50 40 10 30 
+4 3 5 2 1 
+
+
+>>> 2. Two Pointer Method 
+
+- "Two pointers" simply means using two index variables at the same time instead of just one i
+- One index (left) starts at the very beginning: 0.
+- The other index (right) starts at the very end: n - 1 
+- Swap arr[left] and arr[right] and do it until you come to middle point 
+- Think of it like two fingers pointing at the ends of a row of blocks. You swap the two blocks your fingers are touching, move your left finger one step right, move your right finger one step left, and repeat until your fingers meet in the middle.
+- ![alt text](images/image-36.png)
+- ![alt text](images/image-37.png)
+
+
+>>> for fixed style array (without functions)
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  int left = 0;
+  int right = n - 1;
+
+  while (left < right) {
+    swap(arr[left], arr[right]);
+    left++;
+    right--;
+  }
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+    return 0;
+}
+
+```
+
+> output
+50 40 30 20 10 
+
+> complexity
+Time -> O(n)
+Space -> O(1)
+
+
+
+>>> fixed style arrays using functions
+
+```
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void reverseArray(int arr[], int n) {
+  int left = 0;
+  int right = n - 1;
+
+  while (left < right) {
+    swap(arr[left], arr[right]);
+    left++;
+    right--;
+  }
+}
+
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+
+  reverseArray(arr, n);
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+    return 0;
+}
+```
+
+
+>>> now using vectors with functions 
+
+```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void reverseArray(vector<int>& arr) {
+  int left = 0;
+  int right = arr.size() - 1;
+
+  while (left < right) {
+    swap(arr[left], arr[right]);
+    left++;
+    right--;
+  }
+}
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+
+  reverseArray(arr);
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+    return 0;
+}
+```
+
+
+
+>>> Reversing an array and printing sum. Here it is printing Backwards & not reversing an array. 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5];
+
+  cout << "Enter 5 elements: ";
+
+  for (int i = 0; i < 5; i++) {
+    cin >> arr[i];
+  }
+  
+
+  int sum = 0;
+  for (int i = 0; i < 5; i++) {
+    sum = arr[i] + sum;
+  }
+  cout << "Sum is " << sum << endl;
+  
+
+  for (int i = 4; i >= 0; i--) {
+    cout << arr[i] << " ";
+  }
+
+    return 0;
+}
+
+```
+
+
+>>> Manual without using swap
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+
+  int left = 0; int right = n - 1;
+
+  while (left < right) {
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+
+    left++;
+    right--;
+  }
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+
+    return 0;
+}
+```
+
+
+
+
+3. **INSERTION & DELETION** 
+
+
+> Case 1: Insertion at the end 
+Time COmplexity- O(1)  - constant time 
+Space Complexity - O(1)
+
+
+
+>>> Case 2: Insertion at a Specific Index (The Fundamental Algorithm) on Fixed Sized Array
+- Left to right shifting
+  
+Problem stat- Elements are 10,20,30,40. I want to insert 99 into index 2 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[10] = {10,20,30,40};                                    // capacity is 10 
+  int n = 4;                                                      // Currently contain 4 elements 
+  int target = 99, pos = 1;                                       // target is the element we want to insert & pos is the index where we want to insert 
+  
+  int capacity = sizeof(arr) / sizeof(arr[0]);
+  if (n >= capacity) {
+    cout << "Array is full & cannot insert" << endl;
+    return 0;
+  }
+
+
+  for (int i = n-1; i >= pos; i--) {
+    arr[i + 1] = arr[i];
+  }
+
+  arr[pos] = target;
+  n++;                                                  // n++ not reqd if you do a range based loop cout output or u have to update the n manually or type last index on i < n;
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+10 99 20 30 40 
+
+> complexity
+Time Complexity- Worst case i.e O(n) because every element must shift.
+Average case: O(n)
+Space Complexity- O(1)
+
+
+
+
+>>> Inserting a new array at 2nd index
+
+Problem stat- 88 4 5 6 65 77 0 . Insert a new no 45 at 2nd index 
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[7] = {88,4,5,6,65,77};
+
+  for (int i = 6; i >= 2; i--) {
+    arr[i+1] = arr[i];                         //  arr[i] = arr[i - 1];   Alt 
+  }  
+
+  arr[2] = 45;
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+  
+    return 0;
+}
+
+```
+
+
+
+
+>>> Case 3: Doing with std::vectors
+
+- Vectors handle memory reallocation and shifting automatically
+- 10, 20, 30, 40. insert 50 at the end. insert 99 at index 1, insert 5 at beginning 
+
+```cpp
+
+#include <iostream>
+#include <vector> 
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {10,20,30,40};
+
+  arr.push_back(50);                                         // Insert at the end: O(1)  - 10,20,30,40,50
+
+  arr.insert(arr.begin() + 1, 99);                           // Insert at index 1: O(n) - 10,99,20,30,40,50           insert(iterator_position, value)
+
+  arr.insert(arr.begin(), 5);                                // Insert at the beginning: O(n) - 5,10,99,20,30,40,50 
+
+  for (int value : arr) {
+    cout << value << " ";
+  }
+
+    return 0;
+}
+
+```
+> output
+5 10 99 20 30 40 50 
+
+
+
+
+### Deletion 
+
+- Deletion is exact opposite of insertion. 
+- Elements are shifted to left 
+
+>>> With fixed arrays 
+
+Problem stat- 10,20,30,40,50. you want to delete the element at pos or index 1 i.e 20
+int i = pos;
+We start directly at the index of the item we want to eliminate (i = 1). We don't care about index 0 because it stays untouched
+
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  int pos = 1;
+
+  if (pos < 0 || pos >= n) {
+    cout << "Invalid index! Cannot delete" << endl;
+  }
+
+  for (int i = pos; i < n-1; i++) {
+    arr[i] = arr[i + 1];
+  }
+
+  n--;
+
+  for (int i = 0; i < n; i++) {
+    cout << arr[i] << " ";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+10 30 40 50 
+
+
+
+
+>>> with vectors 
+
+Problem stat- 10,20,30,40,50. Delete last element i.e 50, Delete element 20 from index 1, Delete first element 
+
+```
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+
+  arr.pop_back();                                               // .pop_back() removes last element which is 50 . complexity-> O(1)
+
+  arr.erase(arr.begin() + 1);                                  // .erase(iterator_position) removes specific value from index. here its 20. complexity -> O(n)
+
+  arr.erase(arr.begin());                                      // Deletes beginning. complexity-> O(n)   
+
+
+  for (int value: arr) {
+    cout << value << " ";
+  }
+    return 0;
+}
+
+```
+> output
+30 40 
+
+
+
+**Summary Rule of Thumb-**
+Inserting an element: You are making space -> push forward from the end:
+for (int i = n - 1; i >= pos; i--)  
+arr[i + 1] = arr[i];
+
+Deleting an element: You are pulling values in to cover a hole -> pull backward from the 
+for (int i = pos; i < n - 1; i++) 
+arr[i] = arr[i + 1];
+
+
+
+
+
+
+4. **Seraching for an element** 
+
+ ### 1. The simplest method is linear search: check each element from left to right until you find the target. Linear Search (Unsorted or small arrays)
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[5] = {10,20,30,40,50};
+
+  int target = 40; 
+  int index = -1;
+
+  for (int i = 0; i < 5; i++) {
+    if (arr[i] == target) {
+      index = i;
+      break;
+    }
+  }
+  
+
+  if (index != -1) {
+    cout << "Element " << target << " exists at index " << index << endl;
+  }
+
+  else {
+    cout << "Element " << target << " was not found";
+  }
+
+    return 0;
+
+}
+
+```
+
+> I/O
+Element 40 exists at index 3
+
+if i change to target variable to 100
+Element 100 was not found
+
+> complexity 
+Time Complexity: O(n) in the worst/average case, O(1) best case.
+Space Complexity: O(1)
+
+
+
+#### understanding 
+
+why  int index = -1;
+- We initially assume the element does not exist. An index of -1 is a common convention for indicating that a search failed.
+
+
+if (arr[i] == target)
+- We compare the current element with the value we are looking for.
+
+break?
+Once we find the element, we stop searching. There is no need to continue checking the remaining positions.
+
+- Important: If the target does not exist in the array, index stays -1.
+
+
+
+> same but with using functions 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int search(int arr[], int n, int target) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main() {
+
+  int arr[5] = {10,20,30,40,50};
+
+  int n = sizeof(arr) / sizeof(arr[0]);                        // int n = 5;   Alt 
+
+  int target = 40;
+
+  int index = search(arr, n, target);
+
+
+  if (index != -1) {
+    cout << target << " element exists at index " << index << endl;
+  }
+
+  else {
+    cout << target << " element dosen't exists";
+  }
+
+    return 0;
+}
+
+```
+
+
+
+>>> when you let user type elements 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int n;
+  cout << "How many elemnets you want? "; cin >> n;
+
+  int arr[n];
+
+  cout << "Enter " << n << " elemnets: ";
+  for (int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  int target;
+  cout << "Which element you want to search? "; cin >> target;
+
+  int index = -1;
+
+  for (int i = 0; i < n; i++) {
+    if (arr[i] == target) {
+      index = i;
+      break;
+    }
+  }
+
+
+  if (index != -1) {
+    cout << target << " Element exists at index " << index << endl;
+  }
+
+  else {
+    cout << target << " Element was not found in the array";
+  }
+  
+    return 0;
+}
+
+```
+
+> I/O
+How many elemnets you want? 5
+Enter 5 elemnets: 10
+30
+40
+50
+Which element you want to search? 40
+40 Element exists at index 3
+
+
+
+> same but using functions 
+
+```cpp
+
+
+
+#include <iostream>
+using namespace std;
+
+int search(int arr[], int n, int target) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main() {
+
+  int n;
+  cout << "How many elements you want? "; cin >> n;
+
+  int arr[n];
+
+  cout << "Enter " << n << " elements: "; 
+  for (int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  int target;
+  cout << "which element you want to search? "; cin >> target;
+
+  int index = search(arr, n, target);
+
+  if (index != -1) {
+    cout << target << " Element exists at " << index;
+  }
+
+  else {
+    cout << target << " Element not found in array";
+  }
+  
+    return 0;
+}
+
+```
+
+
+
+> same but using vectors & functions 
+
+```cpp
+
+#include <iostream>
+using namespace std;
+#include <vector>
+
+
+int search(vector<int>& arr, int target) {
+  for (int i = 0; i < arr.size(); i++) {
+    if (arr[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main() {
+
+  int n;
+  cout << "How many elements you want? "; cin >> n;
+
+  vector<int> arr(n);
+
+  cout << "Enter " << n << " elements: ";
+  for (int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  int target;
+  cout << "Which element u want to find? "; cin >> target;
+
+  int index = search(arr, target);
+
+
+  if (index != -1) {
+    cout << target << " element exists at " << index;
+  } else {
+    cout << target << " element was not found in the array";
+  }
+
+    return 0;
+}
+
+```
+
+- vectors always carry their own size with them. Calling arr.size() inside the function means you don't need to pass n as an extra argument at all.
+- & is used in vector<int>& ar  as I dont want to copy elements and want to make it faster, u can add const so it cannot be modified 
+
+- int arr[n] is called Variable-Length Array (VLA). but use vector<int> 
+
+![alt text](images/image-32.png)
+
+![alt text](images/image-33.png)
+
+
+
+
+### 2. Binary Search (Sorted Arrays Only)
+
+Unsroted Arrays->  Random arrays like {40, 10, 50, 20, 30}
+Sorted Array -> Ascending or Descending {10, 20, 30, 40, 50}
+
+Sorted vs Unsroted Array ![alt text](images/image-34.png)
+
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int search(int arr[], int n, int target) {
+
+int low = 0; 
+int high = n - 1;
+
+while (low <= high) {
+
+  int mid = low + (high - low) / 2;                             // Prevents potential integer overflow compared to (low + high) / 2
+  
+  if (arr[mid] == target) {
+    return mid;
+  }
+
+  else if (arr[mid] < target) {
+    low = mid + 1;                                             // Discard the left half & focus on right. Target is on right 
+  }
+
+  else {
+    high = mid - 1;                                           // Discrad the right half & focus on the left. Target is on left 
+  }
+}
+return -1;
+} 
+
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  int target = 40;
+
+  int result = search(arr, n, target);
+
+  if (result != -1) {
+    cout << target << " Element found at the index " << result;
+  }
+
+  else {
+    cout << target << " Element was not found in the array";
+  }
+    return 0;
+}
+
+```
+
+
+#### Understanding
+
+ Repeatedly divide the search space in half. Compare the target against the middle element:
+ 
+ If arr[mid] == target, return mid.
+ If target < arr[mid], narrow the search to the left half (high = mid - 1).
+ If target > arr[mid], narrow the search to the right half (low = mid + 1).
+ Time Complexity: O(log n) worst/average case, O(1) best case.
+ Space Complexity: O(1) iterative, O(log n) recursive due to call stack.
+
+ Why is Binary Search So Much Faster? O(log n) vs O(n)  -- Every check cuts the problem size in half
+
+
+ - If you want single return then->   ![alt text](images/image-35.png)
+
+
+
+
+
+### 3. In-built STL functions for searching an element 
+
+Function                                       Requirement                          Return Value / Behavior
+find(arr, arr + n, target)                    None (Linear)                     Pointer/Iterator to element (or arr + n if missing)
+binary_search(arr, arr + n, target)             Sorted                             true if exists, false otherwise
+lower_bound(arr, arr + n, target)               Sorted                             Pointer to first element ≥ target
+upper_bound(arr, arr + n, target)               Sorted                            Pointer to first element > target
+
+
+
+1. **find() — Built-in Linear Search**
+   
+  Condition: Works on any array (sorted or unsorted).
+  How it works: Checks elements one by one from start to finish.
+  Return value: Returns an iterator/pointer to the found element. If it's not found, it points to the end of the array
+  Time Complexity: O(n) linear search 
+
+  ```
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+
+int main() {
+
+  vector<int> arr = {50,20,10,40,30};
+  int target = 40;
+
+  auto it = find(arr.begin(), arr.end(), target);
+
+  if (it != arr.end()) {
+    int index = it - arr.begin();
+    cout << target << " found at index " << index;
+  }
+  else {
+    cout << target << " not found";
+  }
+    return 0;
+}
+```
+```
+
+#### Explanation
+
+find(start, end, target)
+
+What are arr.begin() and arr.end()?
+Instead of plain numbers like index 0 or index 4, C++ containers use iterators (fancy pointers that point directly to items in memory):
+
+arr.begin(): Points directly to the first element (the locker containing 50)
+arr.end(): Points to the imaginary space one position past the last element. It does not point to 30; it points to the empty space right after 30.
+
+What is auto?
+auto tells the C++ compiler: "Figure out the variable type yourself so I don't have to type out a long, messy name."
+
+What is it?
+it is just a variable name chosen by the programmer. U can name it anything.
+You can name it whatever you like, just like naming an index i
+it is short for iterator.
+
+
+arr.size() is a number (int). It simply counts: "There are 4 houses here. It is a quantity, not a location.
+
+arr.end() is an arrow/pointer (an iterator). It is an actual physical location on the street—specifically, the empty lot standing right past the last house.
+
+find() works with locations (it physically walks step-by-step down memory), it requires starting and ending locations, not just a count
+
+The Ruler Analogy:
+Imagine you have a ruler:
+arr.begin() is the 0 cm mark on the ruler.
+Your finger (it) is resting somewhere on the ruler, pointing at the number 30.
+
+How do you find out how many centimeters away from the start your finger is? 
+Your Finger Position - \text{Start of Ruler (0 cm) = Distance
+
+That's all it - arr.begin() is doing:
+It takes your finger's position (it)
+Subtracts the starting position (arr.begin())
+Gives you a plain number (int index) so you can say: "Element found at index 2!
+
+
+50, 20, 10, 40, 30
+
+50 -> 1000 (Address) -> .begin()
+20 -> 1004 
+10 -> 1008
+40 -> 1012 (Target)
+30 -> 1016
+      1020 -> Past the end -> .end()
+
+find() found 40 at address 1012 and find() stops walking and returns that location.
+it is now holding the address 1012.
+
+if (it != arr.end()) {
+-> it is holding 1012
+-> arr.end() is holding 1020. So YES(True)
+
+Because it is true, the computer steps inside the curly braces.
+
+(If your target had been 99, find() would have kept walking until address 1020. 
+Then it would equal 1020, the condition 1020 != 1020 would be False, and the computer would jump straight to the else block.)
+
+int index = it - arr.begin();
+-> it only knows its memory addresses i.e 1012 but not index like 0,1,2
+-> Current Address - Starting Address = 1012- 1000 = 12 bytes 
+12 bytes is 3 positions from starting so index 3 
+
+
+
+
+
+2. **binary_search() — Yes/No Check or True/False Check** 
+
+  Condition: Array MUST be sorted.
+  How it works: Runs binary search internally in O(log n) time.
+  Return value: Returns a simple bool (true or false). It tells you if it exists, but not its index
+  Time Complexity: O(logn)  Binary search 
+
+  ```
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <algorithm>
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+  int target = 40;
+
+  if (binary_search(arr.begin(), arr.end(), target)) {                 // Because it returns a boolean directly, you can drop it straight into an if condition
+    cout << target << " exists in the array";                         // Returns true (1) if the target exists anywhere in the range & false (0) if not 
+  } else {
+    cout << target << " NOT FOUND!";
+  }                  
+    return 0;
+}
+
+```
+```
+
+**If an array is not sorted, you must sort it first:**
+sort(arr.begin(), arr.end());
+bool found = binary_search(arr.begin(), arr.end(), target);
+
+
+
+
+3. **lower_bound() — First element >= target**
+
+  Condition: Array MUST be sorted.
+  How it works: Finds the first element that is greater than or equal to your target.
+  Return value: An iterator/pointer to that element.
+  Complexity: O(logn)
+
+  ```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+  int target = 40;
+
+  auto it = lower_bound(arr.begin(), arr.end(), target);
+
+  int index = it - arr.begin();
+
+  cout << "First " << target << " is at index " << index;
+
+    return 0;
+}
+
+```
+```
+
+> output
+First 40 is at index 3  
+
+but if target is changed to 45 then-
+First 45 is at index 4
+
+
+
+### Remember
+
+- lower_bound() looks for the first element that is >= (greater than or equal to) your target.
+- It returns an iterator (it) pointing to that element.
+
+What if the Target Does NOT Exist?
+This is where the >= (greater than or equal to) definition matters most.
+
+Case A: Target is missing, but larger elements exist
+
+arr = {10, 20, 30, 40, 50} and you search for 45
+Is there a 45? No
+What is the first element that is >= 45 It is 50 (at index 4).
+So it will point to 50 (index 4)
+
+
+Case B: How to Check if the Exact Value Actually Exists
+
+Because lower_bound() points to either the element itself or the next bigger element, you check two things:
+
+```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+  int target = 45;
+
+  auto it = lower_bound(arr.begin(), arr.end(), target);
+
+  if (it != arr.end() && *it == target) {
+    int index = it - arr.begin();
+    cout << target << " found at index " << index;
+  } 
+  else{
+    cout << target << " does not exists in array";
+  }
+
+    return 0;
+}
+
+```
+
+> output
+45 does not exists in array
+
+
+
+
+4. **upper_bound() — First element > target**
+
+  Condition: Array MUST be sorted.
+  How it works: Finds the first element strictly greater than your target.
+  Return value: An iterator/pointer to that element.
+
+lower_bound(): looks for the first element >= target (greater than or equal to).
+upper_bound(): looks for the first element > target (strictly greater than).
+
+```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> arr = {10, 20, 20, 20, 30, 40};
+    int target = 20;
+
+    auto it = upper_bound(arr.begin(), arr.end(), target);
+    int index = it - arr.begin();
+
+    cout << "First element greater than 20 is at index: " << index << endl;                // Output: 4 (value 30)
+
+    return 0;
+}
+
+```
+
+- upper_bound() skips past all the 20s and lands right on 30 at index 4.
+
+- lower bound & upper bound solved 2 problems in O(logn) time
+
+  1. **Count the occurrences of a number**
+  Subtracting the two iterators gives the exact count of duplicates 
+  auto lb = lower_bound(arr.begin(), arr.end(), target);                     // here it is 20. Points to index 1 (first 20)
+  auto ub = upper_bound(arr.begin(), arr.end(), target);                     // Points to index 4 (first item after 20s)
+  int count = ub - lb;                                                       // 4 - 1 = 3 (there are three 20s)
+  
+
+
+  2. **Find the LAST occurrence of a number**
+  Since upper_bound lands on the item immediately after the last occurrence, stepping back by one (ub - 1) gives the last occurrence
+  auto ub = upper_bound(arr.begin(), arr.end(), target);                       // here target is 20 
+  int lastIndex = (ub - arr.begin()) - 1;                                      // 4 - 1 = index 3
+
+
+
+>>> Combining all search STL functions 
+
+Title: Find First and Last Position of an Element in a Sorted Array and Count Its Frequency
+Description:
+Given a sorted array of integers arr in non-decreasing order and an integer target, perform the following tasks
+1. Determine whether the target exists in the array.
+2. If it exists:
+    Find the 0-based index of its first occurrence.
+    Find the 0-based index of its last occurrence.
+    Calculate the total frequency (count) of the target in the array
+3. If it does not exist, indicate that the element was not found.
+
+Constraints & Performance:Your solution should run in O(logn) time complexity instead of a linear O(n) scan 
+
+
+```cpp
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+
+  int arr[] = {2,4,4,4,8,10};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  int target = 40;
+
+  if (binary_search(arr, arr + n, target)) {
+    cout << target << " exists in array" << endl;
+  }
+
+  int* lb = lower_bound(arr, arr + n, target);
+    int first_index = lb - arr;
+  
+
+  int* ub = upper_bound(arr, arr + n, target);
+    int last_index = (ub - arr) - 1;
+  
+
+  cout << "First Ocurrence " << first_index << endl;
+  cout << "Last Ocurrence " << last_index << endl;
+  cout << "Total Count " << ub - lb;
+
+
+    return 0;
+}
+
+```
+
+> output
+4 exists in the array.
+First occurrence at index: 1
+Last occurrence at index: 3
+Total count: 3
+
+> complexity 
+time- O(logn)
+space- O(1)
+
+
+#### working
+
+1. Checking Existence: binary_search
+  if (binary_search(arr, arr + n, target))
+  How it works: Performs standard binary search in O(log n) time.
+  Result: Returns true because 4 exists in arr
+  Note: It only tells you whether it exists, not where.
+
+2. First Occurrence: lower_bound
+   int* lb = lower_bound(arr, arr + n, target);
+   int firstIndex = lb - arr;
+   How it works: lower_bound locates the memory address of the first element that is >= 4
+   Result: The first element meeting this condition is the first 4 at index 1
+   Pointer Arithmetic: arr is the address of index 0. Subtracting the base address (lb - arr) converts the memory pointer into a zero-based integer index:
+
+3. Last Occurrence: upper_bound
+   How it works: upper_bound locates the memory address of the first element strictly > 4
+   Result: The first element strictly greater than 4 is 8 at index 4
+   Finding the Last Match: Since ub lands one slot past the last 4, subtracting 1 step backwards gives the exact position of the last occurrence:
+     Index of 8 = (ub - arr) = 4
+     lastIndex = 4 - 1 = 3
+
+4. Total Frequency: (ub - lb)
+   cout << "Total count: " << (ub - lb) << endl;
+   How it works: All duplicate copies of target lie continuously between lb (inclusive) and ub (exclusive).
+   Result: Direct pointer subtraction gives the distance (number of elements) between the two boundaries: (4-1 = 3)
+
+
+**The Trick to Get the Index**
+
+STL search functions return iterators (pointers to elements), not integers.
+To convert an iterator into a normal 0-based array index, subtract the beginning of the container:
+
+int index = it - arr.begin();               // For std::vector
+int index = ptr - arr;                     // For raw arrays (int arr[])
+
+
+**If an array is not sorted, you must sort it first:**
+sort(arr.begin(), arr.end());
+
+
+
+................ Array Operations Continiuee................
+
+
+
+
+5. **Finding the largest and smallest elements**
+
+- There is two approach for this
+  1. Standard Loop Algorrithm (Manual Iteration O(n))
+  2. STL functions i.e min_element and max_element
+
+
+  1. Approach 1: Using Standard Loop 
+   - Assume the very first element arr[0] is both the smallest and the largest
+   - Loop through the rest of the array starting from index 1
+   - for each element:
+         If it is larger than your current maximum, update the maximum.
+         If it is smaller than your current minimum, update the minimum.
+
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int arr[] = {10,20,30,40,50};
+  int n = sizeof(arr) / sizeof(arr[0]);
+
+  int largest = arr[0];
+  int smallest = arr[0];
+
+  for (int i = 1; i < n; i++) {
+    if (arr[i] > largest) {
+      largest = arr[i];
+    }
+  }
+
+  for (int i = 0; i < n; i++) {
+    if (arr[i] < smallest) {
+      smallest = arr[i];
+    }
+  }
+
+  cout << "Largest element is " << largest << endl;
+  cout << "Smallest element is " << smallest;
+
+    return 0;
+}
+
+```
+
+> output
+Largest element is 50
+Smallest element is 10
+
+> complexity
+Time- O(n)   - visits every element once.
+Space- O(1)  - uses only two integer variables.
+
+> edge case
+What if the array is given via a dynamic stream or function where you don't want to use arr[0]? You can initialize with the absolute extremes from <climits>
+include <climits>
+int arr[] = {-10, -50, -2, -8}
+int smallest = INT_MAX;
+int largest = INT_MIN;
+
+
+
+
+  2. Approach 2: Using STL functions i.e max_element and min_element
+
+- just like find() or lower_bound(), these also return iterators / pointers to the elements. 
+
+```
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+
+  vector<int> arr = {10,20,30,40,50};
+
+  auto minIt = min_element(arr.begin(), arr.end());
+  auto maxIt = max_element(arr.begin(), arr.end());
+
+  cout << "smallest value " << *minIt << " at index " << (minIt- arr.begin()) << endl;
+  cout << "largest value " << *maxIt << " at index " << (maxIt - arr.begin()); 
+
+    return 0;
+}
+
+```
+
+> output
+smallest value 10 at index 0
+largest value 50 at index 4
 
 
 
